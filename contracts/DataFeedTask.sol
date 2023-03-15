@@ -10,6 +10,8 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
  * 任务 1 完成标志：
  * 1. 通过命令 "yarn hardhat test" 使得单元测试 1-7 通过
  * 2. 通过 Remix 在 goerli 测试网部署，并且测试执行是否如预期
+ *
+ * Goerli合约地址：0x9C7C042e15b874F09df41bB69B9fa6d9dcc7060e
  */
 
 contract DataFeedTask {
@@ -80,8 +82,6 @@ contract DataFeedTask {
      * 任务成功标志：
      * 合约部署成功
      * 获取 link/usd, btc/usd, eth/usd 价格
-     *
-     * Goerli合约地址：0x9C7C042e15b874F09df41bB69B9fa6d9dcc7060e
      */
 
     function getLinkPriceFeed() public view returns (int256) {

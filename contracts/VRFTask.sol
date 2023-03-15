@@ -14,6 +14,8 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
  * 任务 2 完成标志：
  * 1. 通过命令 "yarn hardhat test" 使得单元测试 8-10 通过
  * 2. 通过 Remix 在 goerli 测试网部署，并且测试执行是否如预期
+ *
+ * Goerli合约地址: 0x973773e36E56595144Dfed0cb7b1c430EC337536
  */
 
 contract VRFTask is VRFConsumerBaseV2 {
@@ -59,8 +61,8 @@ contract VRFTask is VRFConsumerBaseV2 {
     bytes32 public immutable s_keyHash;
 
     uint256[] public s_randomWords;
-    uint256[] public fulfillSrcRandomWords; // fulfill src randomwords
     uint256 public s_requestId;
+    uint256[] public fulfillSrcRandomWords; // fulfill src randomwords
 
     address s_owner;
 
@@ -114,18 +116,16 @@ contract VRFTask is VRFConsumerBaseV2 {
      * 步骤 4 - 接受随机数，完成逻辑获取 5 个 5 以内**不重复**的随机数
      * 关于如何使得获取的随机数不重复，清参考以下代码
      * https://gist.github.com/cleanunicorn/d27484a2488e0eecec8ce23a0ad4f20b
-     *
-     * Goerli合约地址: 0x973773e36E56595144Dfed0cb7b1c430EC337536
      *  */
     function fulfillRandomWords(
         uint256 requestId,
         uint256[] memory _randomWords
     ) internal override {
         //在此添加 solidity 代码
+        // 单元测试过不去加上这一行，不知道为啥？？？？？？？？？？？？？？
         fulfillSrcRandomWords = _randomWords;
         s_randomWords = shuffle(5, fulfillSrcRandomWords[0]);
-
-        emit ReturnedRandomness(s_randomWords);
+        emit ReturnedRandomness(fulfillSrcRandomWords);
     }
 
     /**
